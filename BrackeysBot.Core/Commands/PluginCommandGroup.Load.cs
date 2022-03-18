@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading.Tasks;
 using BrackeysBot.API.Extensions;
 using BrackeysBot.API.Plugins;
@@ -23,7 +23,7 @@ internal sealed partial class PluginCommandGroup
     {
         await context.AcknowledgeAsync();
 
-        DiscordEmbedBuilder embed = context.Guild.CreateDefaultEmbed();
+        DiscordEmbedBuilder embed = context.Guild.CreateDefaultEmbed(false);
 
         try
         {

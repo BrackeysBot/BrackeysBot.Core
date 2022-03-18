@@ -22,7 +22,7 @@ internal sealed partial class PluginCommandGroup
     {
         await context.AcknowledgeAsync();
 
-        DiscordEmbedBuilder embed = context.Guild.CreateDefaultEmbed();
+        DiscordEmbedBuilder embed = context.Guild.CreateDefaultEmbed(false);
 
         if (_pluginManager.TryGetPlugin(name, out IPlugin? plugin))
         {
