@@ -29,7 +29,7 @@ internal sealed partial class PluginCommandGroup
         {
             IPlugin plugin = _pluginManager.LoadPlugin(name);
 
-            embed.WithColor(0xFF0000);
+            embed.WithColor(0x4CAF50);
             embed.WithTitle(EmbedTitles.PluginLoaded);
             embed.WithDescription(string.Format(EmbedMessages.PluginLoaded, plugin.PluginInfo.Name, plugin.PluginInfo.Version));
         }
