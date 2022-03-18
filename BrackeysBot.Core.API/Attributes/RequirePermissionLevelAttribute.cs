@@ -8,7 +8,7 @@ namespace BrackeysBot.Core.API.Attributes;
 /// <summary>
 ///     Defines that usage of this command must require a specified minimum <see cref="PermissionLevel" />.
 /// </summary>
-internal sealed class RequirePermissionLevelAttribute : CheckBaseAttribute
+public sealed class RequirePermissionLevelAttribute : CheckBaseAttribute
 {
     private readonly PermissionLevel _permissionLevel;
 
