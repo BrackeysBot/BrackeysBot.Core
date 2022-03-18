@@ -23,6 +23,12 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="ErrorDisablingPlugin" xml:space="preserve">
+        <value>An exception was thrown when attempting to disable plugin '{0}'</value>
+    </data>
+    <data name="ErrorEnablingPlugin" xml:space="preserve">
+        <value>An exception was thrown when attempting to enable plugin '{0}'</value>
+    </data>
     <data name="ErrorLoadingPlugin" xml:space="preserve">
         <value>An exception was thrown when attempting to load plugin '{0}'</value>
     </data>

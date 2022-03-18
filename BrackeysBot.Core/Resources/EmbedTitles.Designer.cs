@@ -61,6 +61,24 @@ namespace BrackeysBot.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ⚠️ Error disabling plugin.
+        /// </summary>
+        internal static string ErrorDisablingPlugin {
+            get {
+                return ResourceManager.GetString("ErrorDisablingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ⚠️ Error enabling plugin.
+        /// </summary>
+        internal static string ErrorEnablingPlugin {
+            get {
+                return ResourceManager.GetString("ErrorEnablingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ⚠️ Error loading plugin.
         /// </summary>
         internal static string ErrorLoadingPlugin {
@@ -75,6 +93,24 @@ namespace BrackeysBot.Core.Resources {
         internal static string InvalidPlugin {
             get {
                 return ResourceManager.GetString("InvalidPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ✅ Plugin disabled.
+        /// </summary>
+        internal static string PluginDisabled {
+            get {
+                return ResourceManager.GetString("PluginDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ✅ Plugin enabled.
+        /// </summary>
+        internal static string PluginEnabled {
+            get {
+                return ResourceManager.GetString("PluginEnabled", resourceCulture);
             }
         }
         

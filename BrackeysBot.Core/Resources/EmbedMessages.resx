@@ -26,8 +26,20 @@
     <data name="CantUnloadCorePlugin" xml:space="preserve">
         <value>The core plugin cannot be unloaded!</value>
     </data>
+    <data name="ErrorDisablingPlugin" xml:space="preserve">
+        <value>{0} was thrown when attempting to disable plugin '{1}'. See log for details.</value>
+    </data>
+    <data name="ErrorEnablingPlugin" xml:space="preserve">
+        <value>{0} was thrown when attempting to enable plugin '{1}'. See log for details.</value>
+    </data>
     <data name="ErrorLoadingPlugin" xml:space="preserve">
         <value>{0} was thrown when attempting to load plugin '{1}'. See log for details.</value>
+    </data>
+    <data name="PluginDisabled" xml:space="preserve">
+        <value>{0} {1} was successfully disabled.</value>
+    </data>
+    <data name="PluginEnabled" xml:space="preserve">
+        <value>{0} {1} was successfully enabled.</value>
     </data>
     <data name="PluginLoaded" xml:space="preserve">
         <value>{0} {1} was successfully loaded.</value>

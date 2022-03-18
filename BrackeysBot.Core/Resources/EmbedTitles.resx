@@ -23,11 +23,23 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="ErrorDisablingPlugin" xml:space="preserve">
+        <value>⚠️ Error disabling plugin</value>
+    </data>
+    <data name="ErrorEnablingPlugin" xml:space="preserve">
+        <value>⚠️ Error enabling plugin</value>
+    </data>
     <data name="ErrorLoadingPlugin" xml:space="preserve">
         <value>⚠️ Error loading plugin</value>
     </data>
     <data name="InvalidPlugin" xml:space="preserve">
         <value>🚫 Invalid plugin</value>
+    </data>
+    <data name="PluginDisabled" xml:space="preserve">
+        <value>✅ Plugin disabled</value>
+    </data>
+    <data name="PluginEnabled" xml:space="preserve">
+        <value>✅ Plugin enabled</value>
     </data>
     <data name="PluginLoaded" xml:space="preserve">
         <value>✅ Plugin loaded</value>

@@ -61,6 +61,24 @@ namespace BrackeysBot.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to An exception was thrown when attempting to disable plugin &apos;{0}&apos;.
+        /// </summary>
+        internal static string ErrorDisablingPlugin {
+            get {
+                return ResourceManager.GetString("ErrorDisablingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to An exception was thrown when attempting to enable plugin &apos;{0}&apos;.
+        /// </summary>
+        internal static string ErrorEnablingPlugin {
+            get {
+                return ResourceManager.GetString("ErrorEnablingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to An exception was thrown when attempting to load plugin &apos;{0}&apos;.
         /// </summary>
         internal static string ErrorLoadingPlugin {

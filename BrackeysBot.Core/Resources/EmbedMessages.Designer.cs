@@ -70,11 +70,47 @@ namespace BrackeysBot.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {0} was thrown when attempting to disable plugin &apos;{1}&apos;. See log for details..
+        /// </summary>
+        internal static string ErrorDisablingPlugin {
+            get {
+                return ResourceManager.GetString("ErrorDisablingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} was thrown when attempting to enable plugin &apos;{1}&apos;. See log for details..
+        /// </summary>
+        internal static string ErrorEnablingPlugin {
+            get {
+                return ResourceManager.GetString("ErrorEnablingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to {0} was thrown when attempting to load plugin &apos;{1}&apos;. See log for details..
         /// </summary>
         internal static string ErrorLoadingPlugin {
             get {
                 return ResourceManager.GetString("ErrorLoadingPlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} {1} was successfully disabled..
+        /// </summary>
+        internal static string PluginDisabled {
+            get {
+                return ResourceManager.GetString("PluginDisabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} {1} was successfully enabled..
+        /// </summary>
+        internal static string PluginEnabled {
+            get {
+                return ResourceManager.GetString("PluginEnabled", resourceCulture);
             }
         }
         
