@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API;
 using BrackeysBot.Core.API.Configuration;
+using BrackeysBot.Core.Commands;
 using BrackeysBot.Core.Services;
 using DisCatSharp;
+using DisCatSharp.CommandsNext;
 using DisCatSharp.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using PermissionLevel = BrackeysBot.Core.API.PermissionLevel;
@@ -45,7 +47,8 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         if (!guild.Members.TryGetValue(user.Id, out DiscordMember? member))
             return PermissionLevel.Default;
 
-        if ((member.Permissions & Permissions.Administrator) != 0) return PermissionLevel.Administrator;
+        if ((member.Permissions & Permissions.Administrator) != 0)
+            return PermissionLevel.Administrator;
 
         RoleConfiguration roleConfiguration = configuration.RoleConfiguration;
         List<ulong> roles = member.Roles.Select(r => r.Id).ToList();
@@ -107,6 +110,18 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     {
         _configurationService = ServiceProvider.GetRequiredService<ConfigurationService>();
         _discordLogService = ServiceProvider.GetRequiredService<DiscordLogService>();
-        return Task.CompletedTask;
+
+        string prefix = Configuration.Get<string>("discord.prefix") ?? "[]";
+        Logger.Info($"Registering CommandsNextExtension with prefix {prefix}");
+        CommandsNextExtension commandsNext = DiscordClient.UseCommandsNext(new CommandsNextConfiguration
+        {
+            ServiceProvider = ServiceProvider,
+            StringPrefixes = new[] {prefix}
+        });
+
+        Logger.Info("Registering command modules");
+        commandsNext.RegisterCommands<PluginCommandGroup>();
+
+        return base.OnLoad();
     }
 }
