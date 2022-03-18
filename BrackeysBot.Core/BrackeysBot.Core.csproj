@@ -4,8 +4,8 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <FileVersion>1.0.0-prerelease.3</FileVersion>
-        <Version>1.0.0-prerelease.3</Version>
+        <FileVersion>1.0.0-prerelease.4</FileVersion>
+        <Version>1.0.0-prerelease.4</Version>
         <NeutralLanguage>en-US</NeutralLanguage>
         <RepositoryUrl>https://github.com/oliverbooth/BrackeysBot.Core</RepositoryUrl>
     </PropertyGroup>
