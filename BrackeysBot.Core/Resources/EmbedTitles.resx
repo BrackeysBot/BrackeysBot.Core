@@ -35,6 +35,9 @@
     <data name="InvalidPlugin" xml:space="preserve">
         <value>🚫 Invalid plugin</value>
     </data>
+    <data name="LoadedPlugins" xml:space="preserve">
+        <value>Loaded plugins</value>
+    </data>
     <data name="PluginDisabled" xml:space="preserve">
         <value>✅ Plugin disabled</value>
     </data>

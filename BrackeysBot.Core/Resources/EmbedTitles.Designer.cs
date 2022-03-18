@@ -97,6 +97,15 @@ namespace BrackeysBot.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Loaded plugins.
+        /// </summary>
+        internal static string LoadedPlugins {
+            get {
+                return ResourceManager.GetString("LoadedPlugins", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ✅ Plugin disabled.
         /// </summary>
         internal static string PluginDisabled {
