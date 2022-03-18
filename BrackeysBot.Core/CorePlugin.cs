@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API;
 using BrackeysBot.Core.API.Configuration;
+using BrackeysBot.Core.Services;
 using DisCatSharp;
 using DisCatSharp.Entities;
-using DisCatSharp.EventArgs;
 using Microsoft.Extensions.DependencyInjection;
 using PermissionLevel = BrackeysBot.Core.API.PermissionLevel;
 
@@ -21,7 +21,8 @@ namespace BrackeysBot.Core;
 [PluginDescription("The core plugin for BrackeysBot.")]
 internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 {
-    private readonly Dictionary<DiscordGuild, GuildConfiguration> _guildConfigurations = new();
+    private readonly ConfigurationService _configurationService = null!;
+    private DiscordLogService _discordLogService = null!;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="CorePlugin" /> class.
@@ -57,6 +58,13 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     }
 
     /// <inheritdoc />
+    public Task LogAsync(DiscordGuild guild, DiscordEmbed embed,
+        StaffNotificationOptions notificationOptions = StaffNotificationOptions.None)
+    {
+        return _discordLogService.LogAsync(guild, embed, notificationOptions);
+    }
+
+    /// <inheritdoc />
     public bool IsHigherLevelThan(DiscordUser user, DiscordUser other, DiscordGuild guild)
     {
         if (user is null) throw new ArgumentNullException(nameof(user));
@@ -75,29 +83,28 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     /// <inheritdoc />
     public bool TryGetGuildConfiguration(DiscordGuild guild, [NotNullWhen(true)] out GuildConfiguration? configuration)
     {
-        return _guildConfigurations.TryGetValue(guild, out configuration);
+        // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
+        if (_configurationService is null)
+        {
+            configuration = null;
+            return false;
+        }
+
+        configuration = _configurationService.GetGuildConfiguration(guild);
+        return true;
     }
 
     /// <inheritdoc />
     protected override void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<ICorePlugin>(this);
+        services.AddSingleton<DiscordLogService>();
     }
 
     /// <inheritdoc />
     protected override Task OnLoad()
     {
-        if (DiscordClient is not null)
-            DiscordClient.GuildAvailable += DiscordClientOnGuildAvailable;
-
-        return Task.CompletedTask;
-    }
-
-    private Task DiscordClientOnGuildAvailable(DiscordClient sender, GuildCreateEventArgs e)
-    {
-        var guildConfiguration = Configuration.Get<GuildConfiguration>($"guilds.{e.Guild.Id}");
-        guildConfiguration ??= new GuildConfiguration();
-        _guildConfigurations[e.Guild] = guildConfiguration;
+        _discordLogService = ServiceProvider.GetRequiredService<DiscordLogService>();
         return Task.CompletedTask;
     }
 }

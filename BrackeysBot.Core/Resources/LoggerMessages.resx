@@ -26,4 +26,13 @@
     <data name="ErrorLoadingPlugin" xml:space="preserve">
         <value>An exception was thrown when attempting to load plugin '{0}'</value>
     </data>
+    <data name="LogChannelNotFound" xml:space="preserve">
+        <value>Log channel for {guild} was not found. Actions for this guild will NOT be logged in Discord!</value>
+    </data>
+    <data name="LogChannelNotDefined" xml:space="preserve">
+        <value>No log channel defined for {guild}. Actions for this guild will NOT be logged in Discord!</value>
+    </data>
+    <data name="LogChannelFound" xml:space="preserve">
+        <value>Log channel {channel} was found for {guild}</value>
+    </data>
 </root>

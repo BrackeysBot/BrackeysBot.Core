@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API.Configuration;
 using DisCatSharp.Entities;
@@ -38,6 +39,17 @@ public interface ICorePlugin : IPlugin
     ///     <para><paramref name="guild" /> is <see langword="null" />.</para>
     /// </exception>
     PermissionLevel GetPermissionLevel(DiscordUser user, DiscordGuild guild);
+
+    /// <summary>
+    ///     Logs an embed to the staff log channel.
+    /// </summary>
+    /// <param name="guild">The guild in which to log.</param>
+    /// <param name="embed">The embed to log.</param>
+    /// <param name="notificationOptions">
+    ///     Optional. The staff notification options. Defaults to <see cref="StaffNotificationOptions.None" />.
+    /// </param>
+    Task LogAsync(DiscordGuild guild, DiscordEmbed embed,
+        StaffNotificationOptions notificationOptions = StaffNotificationOptions.None);
 
     /// <summary>
     ///     Determines if a user is a higher permission level than another user.

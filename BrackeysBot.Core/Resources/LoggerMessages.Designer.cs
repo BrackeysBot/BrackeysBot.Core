@@ -68,5 +68,32 @@ namespace BrackeysBot.Core.Resources {
                 return ResourceManager.GetString("ErrorLoadingPlugin", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log channel {channel} was found for {guild}.
+        /// </summary>
+        internal static string LogChannelFound {
+            get {
+                return ResourceManager.GetString("LogChannelFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No log channel defined for {guild}. Actions for this guild will NOT be logged in Discord!.
+        /// </summary>
+        internal static string LogChannelNotDefined {
+            get {
+                return ResourceManager.GetString("LogChannelNotDefined", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Log channel for {guild} was not found. Actions for this guild will NOT be logged in Discord!.
+        /// </summary>
+        internal static string LogChannelNotFound {
+            get {
+                return ResourceManager.GetString("LogChannelNotFound", resourceCulture);
+            }
+        }
     }
 }
