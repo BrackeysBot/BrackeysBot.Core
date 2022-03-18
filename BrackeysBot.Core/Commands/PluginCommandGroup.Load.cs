@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 using BrackeysBot.API.Extensions;
 using BrackeysBot.API.Plugins;
@@ -12,7 +12,7 @@ using DisCatSharp.Entities;
 
 namespace BrackeysBot.Core.Commands;
 
-internal sealed partial class PluginCommand
+internal sealed partial class PluginCommandGroup
 {
     [Command("load")]
     [Description("Loads a plugin.")]

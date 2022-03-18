@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using BrackeysBot.API.Extensions;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API;
@@ -11,7 +11,7 @@ using DisCatSharp.Entities;
 
 namespace BrackeysBot.Core.Commands;
 
-internal sealed partial class PluginCommand
+internal sealed partial class PluginCommandGroup
 {
     [Command("unload")]
     [Description("Unloads a plugin.")]

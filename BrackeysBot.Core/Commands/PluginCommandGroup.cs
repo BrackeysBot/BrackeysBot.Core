@@ -9,16 +9,16 @@ namespace BrackeysBot.Core.Commands;
 ///     Represents a class which implements the <c>plugin</c> command.
 /// </summary>
 [Group("plugin")]
-internal sealed partial class PluginCommand : BaseCommandModule
+internal sealed partial class PluginCommandGroup : BaseCommandModule
 {
     private static readonly ILogger Logger = LogManager.GetCurrentClassLogger();
     private readonly IPluginManager _pluginManager;
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="PluginCommand" /> class.
+    ///     Initializes a new instance of the <see cref="PluginCommandGroup" /> class.
     /// </summary>
     /// <param name="pluginManager">The plugin manager.</param>
-    public PluginCommand(IPluginManager pluginManager)
+    public PluginCommandGroup(IPluginManager pluginManager)
     {
         _pluginManager = pluginManager;
     }
