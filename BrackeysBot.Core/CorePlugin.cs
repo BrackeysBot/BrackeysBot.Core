@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -21,7 +21,7 @@ namespace BrackeysBot.Core;
 [PluginDescription("The core plugin for BrackeysBot.")]
 internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 {
-    private readonly ConfigurationService _configurationService = null!;
+    private ConfigurationService _configurationService = null!;
     private DiscordLogService _discordLogService = null!;
 
     /// <summary>
@@ -98,12 +98,14 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     protected override void ConfigureServices(IServiceCollection services)
     {
         services.AddSingleton<ICorePlugin>(this);
+        services.AddSingleton<ConfigurationService>();
         services.AddSingleton<DiscordLogService>();
     }
 
     /// <inheritdoc />
     protected override Task OnLoad()
     {
+        _configurationService = ServiceProvider.GetRequiredService<ConfigurationService>();
         _discordLogService = ServiceProvider.GetRequiredService<DiscordLogService>();
         return Task.CompletedTask;
     }
