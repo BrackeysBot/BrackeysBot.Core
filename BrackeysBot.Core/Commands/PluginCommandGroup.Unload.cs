@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BrackeysBot.API.Extensions;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API;
@@ -35,7 +35,14 @@ internal sealed partial class PluginCommandGroup
             else
             {
                 PluginInfo info = plugin.PluginInfo;
-                _pluginManager.UnloadPlugin(plugin);
+                try
+                {
+                    _pluginManager.UnloadPlugin(plugin);
+                }
+                catch
+                {
+                    // ignored
+                }
 
                 embed.WithColor(0x4CAF50);
                 embed.WithTitle(EmbedTitles.PluginUnloaded);
