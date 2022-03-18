@@ -23,6 +23,9 @@
             PublicKeyToken=b77a5c561934e089
         </value>
     </resheader>
+    <data name="CantDisableCorePlugin" xml:space="preserve">
+        <value>The core plugin cannot be disabled!</value>
+    </data>
     <data name="CantUnloadCorePlugin" xml:space="preserve">
         <value>The core plugin cannot be unloaded!</value>
     </data>

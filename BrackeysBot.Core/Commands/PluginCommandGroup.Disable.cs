@@ -25,25 +25,40 @@ internal sealed partial class PluginCommandGroup
 
         DiscordEmbedBuilder embed = context.Guild.CreateDefaultEmbed(false);
 
-        try
+
+        if (_pluginManager.TryGetPlugin(name, out IPlugin? plugin))
         {
-            IPlugin? plugin = _pluginManager.GetPlugin(name);
-            if (plugin is null)
-                return;
+            if (plugin is CorePlugin)
+            {
+                embed.WithColor(0xFF0000);
+                embed.WithTitle(EmbedTitles.InvalidPlugin);
+                embed.WithDescription(EmbedMessages.CantDisableCorePlugin);
+            }
+            else
+            {
+                PluginInfo info = plugin.PluginInfo;
+                try
+                {
+                    _pluginManager.DisablePlugin(plugin);
+                    embed.WithColor(0x4CAF50);
+                    embed.WithTitle(EmbedTitles.PluginDisabled);
+                    embed.WithDescription(string.Format(EmbedMessages.PluginDisabled, info.Name, info.Version));
+                }
+                catch (Exception exception)
+                {
+                    Logger.Error(exception, string.Format(LoggerMessages.ErrorDisablingPlugin, name));
 
-            _pluginManager.DisablePlugin(plugin);
-
-            embed.WithColor(0x4CAF50);
-            embed.WithTitle(EmbedTitles.PluginDisabled);
-            embed.WithDescription(string.Format(EmbedMessages.PluginDisabled, plugin.PluginInfo.Name, plugin.PluginInfo.Version));
+                    embed.WithColor(0xFF0000);
+                    embed.WithTitle(EmbedTitles.ErrorDisablingPlugin);
+                    embed.WithDescription(string.Format(EmbedMessages.ErrorDisablingPlugin, exception.GetType(), name));
+                }
+            }
         }
-        catch (Exception exception)
+        else
         {
-            Logger.Error(exception, string.Format(LoggerMessages.ErrorDisablingPlugin, name));
-
             embed.WithColor(0xFF0000);
-            embed.WithTitle(EmbedTitles.ErrorDisablingPlugin);
-            embed.WithDescription(string.Format(EmbedMessages.ErrorDisablingPlugin, exception.GetType(), name));
+            embed.WithTitle(EmbedTitles.InvalidPlugin);
+            embed.WithDescription(string.Format(EmbedMessages.PluginNotLoaded, name));
         }
 
         await context.RespondAsync(embed);

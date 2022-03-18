@@ -61,6 +61,15 @@ namespace BrackeysBot.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The core plugin cannot be disabled!.
+        /// </summary>
+        internal static string CantDisableCorePlugin {
+            get {
+                return ResourceManager.GetString("CantDisableCorePlugin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The core plugin cannot be unloaded!.
         /// </summary>
         internal static string CantUnloadCorePlugin {
