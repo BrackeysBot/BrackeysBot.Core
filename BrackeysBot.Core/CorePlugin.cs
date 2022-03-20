@@ -111,15 +111,8 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         _configurationService = ServiceProvider.GetRequiredService<ConfigurationService>();
         _discordLogService = ServiceProvider.GetRequiredService<DiscordLogService>();
 
-        string prefix = Configuration.Get<string>("discord.prefix") ?? "[]";
-        Logger.Info($"Registering CommandsNextExtension with prefix {prefix}");
-        CommandsNextExtension commandsNext = DiscordClient.UseCommandsNext(new CommandsNextConfiguration
-        {
-            ServiceProvider = ServiceProvider,
-            StringPrefixes = new[] {prefix}
-        });
-
         Logger.Info("Registering command modules");
+        CommandsNextExtension commandsNext = DiscordClient.GetCommandsNext();
         commandsNext.RegisterCommands<PluginCommandGroup>();
 
         return base.OnLoad();
