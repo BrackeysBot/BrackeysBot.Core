@@ -114,6 +114,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         Logger.Info("Registering command modules");
         CommandsNextExtension commandsNext = DiscordClient.GetCommandsNext();
         commandsNext.RegisterCommands<PluginCommandGroup>();
+        commandsNext.RegisterCommands<SayCommand>();
 
         return base.OnLoad();
     }
