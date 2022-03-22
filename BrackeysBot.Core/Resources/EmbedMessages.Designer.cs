@@ -124,7 +124,7 @@ namespace BrackeysBot.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} {1} was successfully loaded..
+        ///   Looks up a localized string similar to {0} {1} was successfully loaded and enabled..
         /// </summary>
         internal static string PluginLoaded {
             get {
@@ -138,6 +138,15 @@ namespace BrackeysBot.Core.Resources {
         internal static string PluginNotLoaded {
             get {
                 return ResourceManager.GetString("PluginNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} {1} was successfully reloaded and enabled..
+        /// </summary>
+        internal static string PluginReloaded {
+            get {
+                return ResourceManager.GetString("PluginReloaded", resourceCulture);
             }
         }
         

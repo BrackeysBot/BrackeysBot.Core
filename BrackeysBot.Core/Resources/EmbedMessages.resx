@@ -45,7 +45,10 @@
         <value>{0} {1} was successfully enabled.</value>
     </data>
     <data name="PluginLoaded" xml:space="preserve">
-        <value>{0} {1} was successfully loaded.</value>
+        <value>{0} {1} was successfully loaded and enabled.</value>
+    </data>
+    <data name="PluginReloaded" xml:space="preserve">
+        <value>{0} {1} was successfully reloaded and enabled.</value>
     </data>
     <data name="PluginNotLoaded" xml:space="preserve">
         <value>No plugin with the name '{0}' is loaded!</value>

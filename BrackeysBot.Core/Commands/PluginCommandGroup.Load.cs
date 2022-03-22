@@ -24,14 +24,12 @@ internal sealed partial class PluginCommandGroup
         await context.AcknowledgeAsync();
 
         DiscordEmbedBuilder embed = context.Guild.CreateDefaultEmbed(false);
+        
+        IPlugin? plugin;
 
         try
         {
-            IPlugin plugin = _pluginManager.LoadPlugin(name);
-
-            embed.WithColor(0x4CAF50);
-            embed.WithTitle(EmbedTitles.PluginLoaded);
-            embed.WithDescription(string.Format(EmbedMessages.PluginLoaded, plugin.PluginInfo.Name, plugin.PluginInfo.Version));
+            plugin = _pluginManager.LoadPlugin(name);
         }
         catch (Exception exception)
         {
@@ -40,6 +38,29 @@ internal sealed partial class PluginCommandGroup
             embed.WithColor(0xFF0000);
             embed.WithTitle(EmbedTitles.ErrorLoadingPlugin);
             embed.WithDescription(string.Format(EmbedMessages.ErrorLoadingPlugin, exception.GetType(), name));
+
+            plugin = null;
+        }
+
+        if (plugin is not null)
+        {
+            try
+            {
+                _pluginManager.EnablePlugin(plugin);
+                PluginInfo info = plugin.PluginInfo;
+
+                embed.WithColor(0x4CAF50);
+                embed.WithTitle(EmbedTitles.PluginLoaded);
+                embed.WithDescription(string.Format(EmbedMessages.PluginLoaded, info.Name, info.Version));
+            }
+            catch (Exception exception)
+            {
+                Logger.Error(exception, string.Format(LoggerMessages.ErrorEnablingPlugin, name));
+
+                embed.WithColor(0xFF0000);
+                embed.WithTitle(EmbedTitles.ErrorEnablingPlugin);
+                embed.WithDescription(string.Format(EmbedMessages.ErrorEnablingPlugin, exception.GetType(), name));
+            }
         }
 
         await context.RespondAsync(embed);
