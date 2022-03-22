@@ -4,16 +4,16 @@
         <TargetFramework>net6.0</TargetFramework>
         <Nullable>enable</Nullable>
         <AssemblyVersion>1.0.0.0</AssemblyVersion>
-        <FileVersion>1.0.0-prerelease.5</FileVersion>
-        <PackageVersion>1.0.0-prerelease.5</PackageVersion>
-        <Version>1.0.0-prerelease.5</Version>
+        <FileVersion>1.0.0-prerelease.6</FileVersion>
+        <PackageVersion>1.0.0-prerelease.6</PackageVersion>
+        <Version>1.0.0-prerelease.6</Version>
         <NeutralLanguage>en-US</NeutralLanguage>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <RepositoryUrl>https://github.com/oliverbooth/BrackeysBot.Core</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BrackeysBot.API" Version="4.0.0-prerelease.11"/>
+        <PackageReference Include="BrackeysBot.API" Version="4.0.0-prerelease.12"/>
     </ItemGroup>
 
 </Project>
