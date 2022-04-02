@@ -1,4 +1,4 @@
-﻿using DisCatSharp.Entities;
+﻿using DSharpPlus.Entities;
 
 namespace BrackeysBot.Core.API.Extensions;
 

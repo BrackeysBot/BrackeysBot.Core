@@ -1,7 +1,7 @@
 ﻿using System;
 using BrackeysBot.API.Configuration;
 using BrackeysBot.Core.API.Configuration;
-using DisCatSharp.Entities;
+using DSharpPlus.Entities;
 
 namespace BrackeysBot.Core.Services;
 

@@ -5,10 +5,10 @@ using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API.Attributes;
 using BrackeysBot.Core.API.Extensions;
 using BrackeysBot.Core.Resources;
-using DisCatSharp;
-using DisCatSharp.CommandsNext;
-using DisCatSharp.CommandsNext.Attributes;
-using DisCatSharp.Entities;
+using DSharpPlus;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 using PermissionLevel = BrackeysBot.Core.API.PermissionLevel;
 
 namespace BrackeysBot.Core.Commands;

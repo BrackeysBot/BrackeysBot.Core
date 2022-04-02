@@ -1,6 +1,6 @@
 ﻿using BrackeysBot.API.Plugins;
-using DisCatSharp.CommandsNext;
-using DisCatSharp.CommandsNext.Attributes;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
 using NLog;
 
 namespace BrackeysBot.Core.Commands;

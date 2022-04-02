@@ -1,6 +1,6 @@
 ﻿using BrackeysBot.API.Extensions;
 using BrackeysBot.Core.API.Configuration;
-using DisCatSharp.Entities;
+using DSharpPlus.Entities;
 
 namespace BrackeysBot.Core.API.Extensions;
 

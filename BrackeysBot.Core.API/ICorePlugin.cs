@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API.Configuration;
-using DisCatSharp.Entities;
+using DSharpPlus.Entities;
 
 [assembly: InternalsVisibleTo("BrackeysBot.Core")]
 

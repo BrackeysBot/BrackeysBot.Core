@@ -8,8 +8,8 @@ using BrackeysBot.Core.API;
 using BrackeysBot.Core.API.Configuration;
 using BrackeysBot.Core.Commands;
 using BrackeysBot.Core.Services;
-using DisCatSharp.CommandsNext;
-using DisCatSharp.Entities;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using PermissionLevel = BrackeysBot.Core.API.PermissionLevel;
 
@@ -46,7 +46,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         if (!guild.Members.TryGetValue(user.Id, out DiscordMember? member))
             return PermissionLevel.Default;
 
-        if ((member.Permissions & DisCatSharp.Permissions.Administrator) != 0)
+        if ((member.Permissions & DSharpPlus.Permissions.Administrator) != 0)
             return PermissionLevel.Administrator;
 
         RoleConfiguration roleConfiguration = configuration.RoleConfiguration;

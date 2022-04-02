@@ -6,9 +6,9 @@ using BrackeysBot.Core.API;
 using BrackeysBot.Core.API.Attributes;
 using BrackeysBot.Core.API.Extensions;
 using BrackeysBot.Core.Resources;
-using DisCatSharp.CommandsNext;
-using DisCatSharp.CommandsNext.Attributes;
-using DisCatSharp.Entities;
+using DSharpPlus.CommandsNext;
+using DSharpPlus.CommandsNext.Attributes;
+using DSharpPlus.Entities;
 
 namespace BrackeysBot.Core.Commands;
 
