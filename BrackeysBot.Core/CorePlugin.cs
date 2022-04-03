@@ -1,8 +1,9 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
+using BrackeysBot.API.Extensions;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API;
 using BrackeysBot.Core.API.Configuration;
@@ -101,7 +102,8 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     {
         services.AddSingleton<ICorePlugin>(this);
         services.AddSingleton<ConfigurationService>();
-        services.AddSingleton<DiscordLogService>();
+
+        services.AddHostedSingleton<DiscordLogService>();
     }
 
     /// <inheritdoc />
