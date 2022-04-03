@@ -1,5 +1,6 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Threading.Tasks;
@@ -109,6 +110,9 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     /// <inheritdoc />
     protected override Task OnLoad()
     {
+        Trace.Assert(DiscordClient is not null);
+        Debug.Assert(DiscordClient is not null);
+
         _configurationService = ServiceProvider.GetRequiredService<ConfigurationService>();
         _discordLogService = ServiceProvider.GetRequiredService<DiscordLogService>();
 
