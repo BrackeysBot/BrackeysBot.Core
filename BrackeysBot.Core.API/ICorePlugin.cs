@@ -81,6 +81,18 @@ public interface ICorePlugin : IPlugin
     bool IsStaffMember(DiscordUser user, DiscordGuild guild);
 
     /// <summary>
+    ///     Registers a field to be displayed with the <c>userinfo</c> command.
+    /// </summary>
+    /// <param name="builderEvaluator">The field builder.</param>
+    void RegisterUserInfoField(Action<UserInfoFieldBuilder> builderEvaluator);
+
+    /// <summary>
+    ///     Registers a field to be displayed with the <c>userinfo</c> command.
+    /// </summary>
+    /// <param name="builder">The field builder.</param>
+    void RegisterUserInfoField(UserInfoFieldBuilder builder);
+
+    /// <summary>
     ///     Retrieves the configuration for a specified guild. A return value indicates whether the retrieval was successful.
     /// </summary>
     /// <param name="guild">The guild whose configuration to retrieve.</param>

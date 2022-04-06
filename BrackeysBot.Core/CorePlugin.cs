@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -8,8 +8,10 @@ using BrackeysBot.API.Extensions;
 using BrackeysBot.API.Plugins;
 using BrackeysBot.Core.API;
 using BrackeysBot.Core.API.Configuration;
+using BrackeysBot.Core.API.Extensions;
 using BrackeysBot.Core.Commands;
 using BrackeysBot.Core.Services;
+using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +28,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 {
     private ConfigurationService _configurationService = null!;
     private DiscordLogService _discordLogService = null!;
+    private UserInfoService _userInfoService = null!;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="CorePlugin" /> class.
@@ -85,6 +88,21 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     }
 
     /// <inheritdoc />
+    public void RegisterUserInfoField(Action<UserInfoFieldBuilder> builderEvaluator)
+    {
+        if (builderEvaluator is null) throw new ArgumentNullException(nameof(builderEvaluator));
+        var builder = new UserInfoFieldBuilder();
+        builderEvaluator(builder);
+        RegisterUserInfoField(builder);
+    }
+
+    /// <inheritdoc />
+    public void RegisterUserInfoField(UserInfoFieldBuilder builder)
+    {
+        _userInfoService.RegisterField(builder);
+    }
+
+    /// <inheritdoc />
     public bool TryGetGuildConfiguration(DiscordGuild guild, [NotNullWhen(true)] out GuildConfiguration? configuration)
     {
         // ReSharper disable once ConditionIsAlwaysTrueOrFalseAccordingToNullableAPIContract
@@ -103,6 +121,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     {
         services.AddSingleton<ICorePlugin>(this);
         services.AddSingleton<ConfigurationService>();
+        services.AddSingleton<UserInfoService>();
 
         services.AddHostedSingleton<DiscordLogService>();
     }
@@ -115,12 +134,62 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 
         _configurationService = ServiceProvider.GetRequiredService<ConfigurationService>();
         _discordLogService = ServiceProvider.GetRequiredService<DiscordLogService>();
+        _userInfoService = ServiceProvider.GetRequiredService<UserInfoService>();
+
+        RegisterUserInfoFields();
 
         Logger.Info("Registering command modules");
         CommandsNextExtension commandsNext = DiscordClient.GetCommandsNext();
         commandsNext.RegisterCommands<PluginCommandGroup>();
         commandsNext.RegisterCommands<SayCommand>();
+        commandsNext.RegisterCommands<UserInfoCommand>();
 
         return base.OnLoad();
+    }
+
+    private void RegisterUserInfoFields()
+    {
+        RegisterUserInfoField(builder =>
+        {
+            builder.WithName("Username");
+            builder.WithValue(context =>
+            {
+                string username = context.TargetUser.GetUsernameWithDiscriminator();
+                return context.TargetUser.IsBot ? $"🤖 {username}" : username;
+            });
+        });
+
+        RegisterUserInfoField(builder =>
+        {
+            builder.WithName("User ID");
+            builder.WithValue(context => context.TargetUser.Id);
+        });
+
+        RegisterUserInfoField(builder =>
+        {
+            builder.WithName("User Created");
+            builder.WithValue(context => Formatter.Timestamp(context.TargetUser.CreationTimestamp));
+        });
+
+        RegisterUserInfoField(builder =>
+        {
+            builder.WithName("Nickname");
+            builder.WithValue(context => context.TargetMember!.Nickname);
+            builder.WithExecutionFilter(context => !string.IsNullOrWhiteSpace(context.TargetMember?.Nickname));
+        });
+
+        RegisterUserInfoField(builder =>
+        {
+            builder.WithName("Join Date");
+            builder.WithValue(context => Formatter.Timestamp(context.TargetMember!.JoinedAt));
+            builder.WithExecutionFilter(context => context.TargetMember is not null);
+        });
+
+        RegisterUserInfoField(builder =>
+        {
+            builder.WithName("Permission Level");
+            builder.WithValue(context => context.TargetMember!.GetPermissionLevel(context.Guild!).ToString("G"));
+            builder.WithExecutionFilter(context => context.TargetMember is not null);
+        });
     }
 }
