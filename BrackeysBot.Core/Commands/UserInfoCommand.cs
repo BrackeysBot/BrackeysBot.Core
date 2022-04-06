@@ -78,8 +78,8 @@ internal sealed class UserInfoCommand : BaseCommandModule
 
         if (isMember)
         {
-            embed.WithColor(member!.Color);
-            member = await user.GetAsMemberAsync(context.Guild);
+            member = await context.Guild.GetMemberAsync(user.Id);
+            embed.WithColor(member.Color);
         }
         else
         {
