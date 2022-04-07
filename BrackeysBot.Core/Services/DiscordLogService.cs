@@ -11,7 +11,6 @@ using DSharpPlus.Entities;
 using DSharpPlus.EventArgs;
 using Microsoft.Extensions.Hosting;
 using NLog;
-using SmartFormat;
 
 namespace BrackeysBot.Core.Services;
 
@@ -95,14 +94,12 @@ internal sealed class DiscordLogService : BackgroundService
         if (logChannelId != 0)
         {
             if (e.Guild.GetChannel(logChannelId) is { } channel)
-                Logger.Info(LoggerMessages.LogChannelFound.FormatSmart(new {channel, guild = e.Guild}));
+                Logger.Info(string.Format(LoggerMessages.LogChannelFound, channel, e.Guild));
             else
-                Logger.Warn(LoggerMessages.LogChannelNotFound.FormatSmart(new {guild = e.Guild}));
+                Logger.Warn(string.Format(LoggerMessages.LogChannelNotFound, e.Guild));
         }
         else
-        {
-            Logger.Warn(LoggerMessages.LogChannelNotDefined.FormatSmart(new {guild = e.Guild}));
-        }
+            Logger.Warn(string.Format(LoggerMessages.LogChannelNotDefined, e.Guild));
 
         return Task.CompletedTask;
     }

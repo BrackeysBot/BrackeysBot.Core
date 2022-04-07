@@ -11,10 +11,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="SmartFormat.NET" Version="3.0.0"/>
-    </ItemGroup>
-
-    <ItemGroup>
         <ProjectReference Include="..\BrackeysBot.Core.API\BrackeysBot.Core.API.csproj"/>
     </ItemGroup>
 
