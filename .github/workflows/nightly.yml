@@ -1,14 +1,15 @@
-name: Tagged Pre-Release
+name: Publish Nightly
 
 on:
   push:
-    tags:
-      - "v[0-9]+.[0-9]+.[0-9]+-*"
+    branches:
+      - main
+      - develop
 
 jobs:
-  tagged-prerelease:
-    name: "Tagged Pre-Release"
+  nightly:
     runs-on: ubuntu-latest
+    if: "!contains(format('{0} {1}', github.event.head_commit.message, github.event.pull_request.title), '[ci-skip]')"
 
     steps:
     - name: Checkout
@@ -25,22 +26,16 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
 
-    - name: Publish
-      run: dotnet publish -c Release -r linux-x64 --self-contained true
+    - name: Build
+      run: dotnet build -c Debug
 
     - name: Build NuGet package
       run: |
         mkdir build
-        dotnet pack BrackeysBot.Core.API -p:SymbolPackageFormat=snupkg --include-symbols --include-source -o build -p:VersionSuffix='nightly' -p:BuildNumber=${{ github.run_number }}
+        dotnet pack -p:SymbolPackageFormat=snupkg --include-symbols --include-source -o build -p:VersionSuffix='nightly' -p:BuildNumber=${{ github.run_number }}
 
     - name: Push NuGet Package to GitHub
       run: dotnet nuget push "build/*" --source "github" --api-key ${{ secrets.GITHUB_TOKEN }} --skip-duplicate
 
     - name: Push NuGet Package to nuget.org
       run: dotnet nuget push "build/*" --source https://api.nuget.org/v3/index.json --api-key ${{ secrets.NUGET_API_KEY }} --skip-duplicate
-
-    - name: Create Release
-      uses: "marvinpinto/action-automatic-releases@latest"
-      with:
-        repo_token: "${{ secrets.GITHUB_TOKEN }}"
-        prerelease: true

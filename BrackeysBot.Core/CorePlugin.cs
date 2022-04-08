@@ -22,7 +22,7 @@ namespace BrackeysBot.Core;
 /// <summary>
 ///     Represents the core plugin for BrackeysBot.
 /// </summary>
-[Plugin("BrackeysBot.Core", "1.0.0")]
+[Plugin("BrackeysBot.Core")]
 [PluginDescription("The core plugin for BrackeysBot.")]
 internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 {
