@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -137,6 +137,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 
         Logger.Info("Registering command modules");
         CommandsNextExtension commandsNext = DiscordClient.GetCommandsNext();
+        commandsNext.RegisterCommands<LogCommand>();
         commandsNext.RegisterCommands<PluginCommandGroup>();
         commandsNext.RegisterCommands<SayCommand>();
         commandsNext.RegisterCommands<UserInfoCommand>();
