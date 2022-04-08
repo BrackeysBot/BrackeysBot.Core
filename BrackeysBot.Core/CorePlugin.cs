@@ -129,9 +129,6 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     /// <inheritdoc />
     protected override Task OnLoad()
     {
-        Trace.Assert(DiscordClient is not null);
-        Debug.Assert(DiscordClient is not null);
-
         _configurationService = ServiceProvider.GetRequiredService<ConfigurationService>();
         _discordLogService = ServiceProvider.GetRequiredService<DiscordLogService>();
         _userInfoService = ServiceProvider.GetRequiredService<UserInfoService>();
