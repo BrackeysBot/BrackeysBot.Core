@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <VersionPrefix>1.0.0</VersionPrefix>
         <NeutralLanguage>en-US</NeutralLanguage>
-        <RepositoryUrl>https://github.com/oliverbooth/BrackeysBot.Core</RepositoryUrl>
+        <RepositoryUrl>https://github.com/BrackeysBot/BrackeysBot.Core</RepositoryUrl>
     </PropertyGroup>
 
     <PropertyGroup Condition="'$(VersionSuffix)' != '' And '$(BuildNumber)' == ''">
