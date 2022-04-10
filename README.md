@@ -1,10 +1,11 @@
 <h1 align="center">BrackeysBot Core Plugin</h1>
 <p align="center"><i>The core plugin for <a href="https://github.com/oliverbooth/BrackeysBot">BrackeysBot</a> which offers fundamental and common functionality.</i></p>
 <p align="center">
-<a href="https://github.com/oliverbooth/BrackeysBot.Core/releases"><img src="https://img.shields.io/github/v/release/oliverbooth/BrackeysBot.Core?include_prereleases"></a>
-<a href="https://github.com/oliverbooth/BrackeysBot.Core/actions?query=workflow%3A%22.NET%22"><img src="https://img.shields.io/github/workflow/status/oliverbooth/BrackeysBot.Core/.NET" alt="GitHub Workflow Status" title="GitHub Workflow Status"></a>
-<a href="https://github.com/oliverbooth/BrackeysBot.Core/issues"><img src="https://img.shields.io/github/issues/oliverbooth/BrackeysBot.Core" alt="GitHub Issues" title="GitHub Issues"></a>
-<a href="https://github.com/oliverbooth/BrackeysBot.Core/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/oliverbooth/BrackeysBot.Core" alt="MIT License" title="MIT License"></a>
+<a href="https://www.nuget.org/packages/BrackeysBot.Core/"><img src="https://img.shields.io/nuget/v/BrackeysBot.Core.API?label=stable%20build"></a>
+<a href="https://www.nuget.org/packages/BrackeysBot.Core/"><img src="https://img.shields.io/nuget/vpre/BrackeysBot.Core.API?label=nightly%20build"></a>
+<a href="https://github.com/BrackeysBot/BrackeysBot.Core/actions?query=workflow%3A%22.NET%22"><img src="https://img.shields.io/github/workflow/status/BrackeysBot/BrackeysBot.Core/.NET" alt="GitHub Workflow Status" title="GitHub Workflow Status"></a>
+<a href="https://github.com/BrackeysBot/BrackeysBot.Core/issues"><img src="https://img.shields.io/github/issues/BrackeysBot/BrackeysBot.Core" alt="GitHub Issues" title="GitHub Issues"></a>
+<a href="https://github.com/BrackeysBot/BrackeysBot.Core/blob/main/LICENSE.md"><img src="https://img.shields.io/github/license/BrackeysBot/BrackeysBot.Core" alt="MIT License" title="MIT License"></a>
 </p>
 
 ## About
