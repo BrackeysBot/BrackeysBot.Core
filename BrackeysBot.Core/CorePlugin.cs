@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
@@ -14,6 +14,8 @@ using BrackeysBot.Core.Services;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
 using DSharpPlus.Entities;
+using DSharpPlus.EventArgs;
+using DSharpPlus.SlashCommands;
 using Microsoft.Extensions.DependencyInjection;
 using PermissionLevel = BrackeysBot.Core.API.PermissionLevel;
 
@@ -142,7 +144,16 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         commandsNext.RegisterCommands<SayCommand>();
         commandsNext.RegisterCommands<UserInfoCommand>();
 
+        DiscordClient.GuildAvailable += DiscordClientOnGuildAvailable;
+
         return base.OnLoad();
+    }
+
+    private Task DiscordClientOnGuildAvailable(DiscordClient sender, GuildCreateEventArgs e)
+    {
+        SlashCommandsExtension slashCommands = DiscordClient.GetSlashCommands();
+        slashCommands.RegisterCommands<UserInfoApplicationCommand>(e.Guild.Id);
+        return slashCommands.RefreshCommands();
     }
 
     private void RegisterUserInfoFields()
