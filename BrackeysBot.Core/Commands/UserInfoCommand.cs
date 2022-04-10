@@ -68,38 +68,8 @@ internal sealed class UserInfoCommand : BaseCommandModule
     {
         _ = context.AcknowledgeAsync();
 
-        var embed = new DiscordEmbedBuilder();
-        embed.WithAuthor(user);
-        embed.WithTitle($"Information about {user.GetUsernameWithDiscriminator()}");
-        embed.WithThumbnail(user.GetAvatarUrl(ImageFormat.Png));
-
-        bool isMember = await user.IsMemberOfAsync(context.Guild);
-        DiscordMember? member = null;
-
-        if (isMember)
-        {
-            member = await context.Guild.GetMemberAsync(user.Id);
-            embed.WithColor(member.Color);
-        }
-        else
-        {
-            embed.WithColor(DiscordColor.Gray);
-            embed.WithFooter("⚠️ This user is not currently in the server!");
-        }
-
-        var fieldContext = new UserInfoFieldContext
-        {
-            Channel = context.Channel,
-            Guild = context.Guild,
-            User = context.User,
-            Member = context.Member,
-            TargetMember = member,
-            TargetUser = user
-        };
-
-        foreach (UserInfoField field in _userInfoService.RegisteredFields.Where(f => f.FilterPredicate(fieldContext)))
-            embed.AddField(field.Name, field.ValueEvaluator(fieldContext), true);
-
+        UserInfoFieldContext fieldContext = await _userInfoService.CreateContextAsync(context, user);
+        DiscordEmbed embed = _userInfoService.CreateEmbed(fieldContext);
         await context.RespondAsync(embed);
     }
 }
