@@ -1,4 +1,5 @@
 <h1 align="center">BrackeysBot Core Plugin</h1>
+<p align="center"><img src="https://avatars.githubusercontent.com/u/102218313?s=200&v=4"></p>
 <p align="center"><i>The core plugin for <a href="https://github.com/oliverbooth/BrackeysBot">BrackeysBot</a> which offers fundamental and common functionality.</i></p>
 <p align="center">
 <a href="https://www.nuget.org/packages/BrackeysBot.Core/"><img src="https://img.shields.io/nuget/v/BrackeysBot.Core.API?label=stable%20build"></a>
