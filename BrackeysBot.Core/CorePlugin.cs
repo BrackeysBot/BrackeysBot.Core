@@ -125,6 +125,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         services.AddSingleton<ConfigurationService>();
         services.AddSingleton<UserInfoService>();
 
+        services.AddHostedSingleton<BufferedLogService>();
         services.AddHostedSingleton<DiscordLogService>();
     }
 
