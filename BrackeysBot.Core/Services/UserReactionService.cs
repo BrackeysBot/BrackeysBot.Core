@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using BrackeysBot.Core.API.Configuration;
 using BrackeysBot.Core.Data;
 using DSharpPlus;
 using DSharpPlus.Entities;
@@ -18,15 +19,18 @@ internal sealed class UserReactionService : BackgroundService
     private readonly ILogger<UserReactionService> _logger;
     private readonly DiscordClient _discordClient;
     private readonly BookmarkService _bookmarkService;
+    private readonly ConfigurationService _configurationService;
 
     /// <summary>
     ///     Initializes a new instance of the <see cref="UserReactionService" /> class.
     /// </summary>
-    public UserReactionService(ILogger<UserReactionService> logger, DiscordClient discordClient, BookmarkService bookmarkService)
+    public UserReactionService(ILogger<UserReactionService> logger, DiscordClient discordClient, BookmarkService bookmarkService,
+        ConfigurationService configurationService)
     {
         _logger = logger;
         _discordClient = discordClient;
         _bookmarkService = bookmarkService;
+        _configurationService = configurationService;
     }
 
     /// <inheritdoc />
@@ -73,7 +77,9 @@ internal sealed class UserReactionService : BackgroundService
         if (e.Guild is null)
             return;
 
-        if (e.Emoji.GetDiscordName() != ":bookmark:")
+        GuildConfiguration configuration = _configurationService.GetGuildConfiguration(e.Guild);
+
+        if (e.Emoji.GetDiscordName() != configuration.BookmarkEmoji)
             return;
 
         await e.Message.DeleteReactionAsync(e.Emoji, e.User).ConfigureAwait(false);

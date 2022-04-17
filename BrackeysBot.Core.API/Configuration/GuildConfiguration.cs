@@ -1,4 +1,4 @@
-﻿using System.Text.Json.Serialization;
+using System.Text.Json.Serialization;
 
 namespace BrackeysBot.Core.API.Configuration;
 
@@ -7,6 +7,13 @@ namespace BrackeysBot.Core.API.Configuration;
 /// </summary>
 public sealed class GuildConfiguration
 {
+    /// <summary>
+    ///     Gets or sets the emoji for which to listen when users react to bookmark a message.
+    /// </summary>
+    /// <value>The bookmark reaction for which to listen.</value>
+    [JsonPropertyName("bookmarkEmoji")]
+    public string BookmarkEmoji { get; set; } = ":bookmark:";
+
     /// <summary>
     ///     Gets or sets the channel configuration.
     /// </summary>
