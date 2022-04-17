@@ -149,7 +149,6 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         commandsNext.RegisterCommands<LogCommand>();
         commandsNext.RegisterCommands<PluginCommandGroup>();
         commandsNext.RegisterCommands<SayCommand>();
-        commandsNext.RegisterCommands<UserInfoCommand>();
 
         DiscordClient.GuildAvailable += DiscordClientOnGuildAvailable;
 

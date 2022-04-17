@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BrackeysBot.Core.API;
 using BrackeysBot.Core.Services;
 using DSharpPlus;
@@ -21,11 +21,23 @@ internal sealed class UserInfoApplicationCommand : ApplicationCommandModule
     }
 
     [ContextMenu(ApplicationCommandType.UserContextMenu, "User Info")]
-    public async Task UserInfoAsync(ContextMenuContext context)
+    public async Task UserInfoContextMenuAsync(ContextMenuContext context)
     {
         _ = context.DeferAsync(true);
 
         UserInfoFieldContext fieldContext = await _userInfoService.CreateContextAsync(context);
+        DiscordEmbed embed = _userInfoService.CreateEmbed(fieldContext);
+        await context.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed));
+    }
+
+    [SlashCommand("userinfo", "Displays information about a user.")]
+    public async Task UserInfoAsync(InteractionContext context,
+        [Option("user", "The user whose information to retrieve.")]
+        DiscordUser user)
+    {
+        _ = context.DeferAsync(true);
+
+        UserInfoFieldContext fieldContext = await _userInfoService.CreateContextAsync(context, user);
         DiscordEmbed embed = _userInfoService.CreateEmbed(fieldContext);
         await context.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed));
     }
