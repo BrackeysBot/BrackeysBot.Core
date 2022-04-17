@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 using BrackeysBot.Core.API;
 using BrackeysBot.Core.Services;
 using DSharpPlus;
@@ -25,7 +25,7 @@ internal sealed class UserInfoApplicationCommand : ApplicationCommandModule
     {
         _ = context.DeferAsync(true);
 
-        UserInfoFieldContext fieldContext = _userInfoService.CreateContext(context);
+        UserInfoFieldContext fieldContext = await _userInfoService.CreateContextAsync(context);
         DiscordEmbed embed = _userInfoService.CreateEmbed(fieldContext);
         await context.EditResponseAsync(new DiscordWebhookBuilder().AddEmbed(embed));
     }

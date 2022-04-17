@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -33,17 +33,20 @@ internal sealed class UserInfoService
     /// <param name="context">The context from which to construct the <see cref="UserInfoFieldContext" />.</param>
     /// <returns>A new instance of <see cref="UserInfoFieldContext" />.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="context" /> is <see langword="null" />.</exception>
-    public UserInfoFieldContext CreateContext(ContextMenuContext context)
+    public async Task<UserInfoFieldContext> CreateContextAsync(ContextMenuContext context)
     {
         if (context is null) throw new ArgumentNullException(nameof(context));
+
+        DiscordUser user = context.Interaction.Data.Resolved.Users.First().Value;
+        DiscordMember? member = await user.GetAsMemberAsync(context.Guild);
 
         return new UserInfoFieldContext
         {
             Channel = context.Channel,
             Guild = context.Guild,
             Member = context.Member,
-            TargetMember = context.TargetMember,
-            TargetUser = context.TargetUser,
+            TargetMember = member,
+            TargetUser = user,
             User = context.User,
         };
     }
