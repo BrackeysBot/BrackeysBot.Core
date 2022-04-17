@@ -10,6 +10,7 @@ using BrackeysBot.Core.API;
 using BrackeysBot.Core.API.Configuration;
 using BrackeysBot.Core.API.Extensions;
 using BrackeysBot.Core.Commands;
+using BrackeysBot.Core.Data;
 using BrackeysBot.Core.Services;
 using DSharpPlus;
 using DSharpPlus.CommandsNext;
@@ -26,6 +27,7 @@ namespace BrackeysBot.Core;
 /// </summary>
 [Plugin("BrackeysBot.Core")]
 [PluginDescription("The core plugin for BrackeysBot.")]
+[PluginIntents(DiscordIntents.All)]
 internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 {
     private ConfigurationService _configurationService = null!;
@@ -125,8 +127,12 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         services.AddSingleton<ConfigurationService>();
         services.AddSingleton<UserInfoService>();
 
+        services.AddHostedSingleton<BookmarkService>();
         services.AddHostedSingleton<BufferedLogService>();
         services.AddHostedSingleton<DiscordLogService>();
+        services.AddHostedSingleton<UserReactionService>();
+
+        services.AddDbContext<CoreContext>();
     }
 
     /// <inheritdoc />
@@ -153,6 +159,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
     private Task DiscordClientOnGuildAvailable(DiscordClient sender, GuildCreateEventArgs e)
     {
         SlashCommandsExtension slashCommands = DiscordClient.GetSlashCommands();
+        slashCommands.RegisterCommands<BookmarkApplicationCommand>(e.Guild.Id);
         slashCommands.RegisterCommands<UserInfoApplicationCommand>(e.Guild.Id);
         return slashCommands.RefreshCommands();
     }
