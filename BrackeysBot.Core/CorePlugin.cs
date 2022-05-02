@@ -26,7 +26,7 @@ namespace BrackeysBot.Core;
 /// </summary>
 [Plugin("BrackeysBot.Core")]
 [PluginDescription("The core plugin for BrackeysBot.")]
-[PluginIntents(DiscordIntents.All)]
+[PluginIntents(DiscordIntents.AllUnprivileged)]
 internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 {
     private ConfigurationService _configurationService = null!;
@@ -145,21 +145,21 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
 
         Logger.Info("Registering command modules");
         CommandsNextExtension commandsNext = DiscordClient.GetCommandsNext();
-        commandsNext.RegisterCommands<LogCommand>();
-        commandsNext.RegisterCommands<PluginCommandGroup>();
-        commandsNext.RegisterCommands<SayCommand>();
+        commandsNext.RegisterCommands(typeof(CorePlugin).Assembly);
+
+        SlashCommandsExtension slashCommands = DiscordClient.GetSlashCommands();
+        slashCommands.RegisterCommands<SayCommand>();
+        slashCommands.RegisterCommands<UserInfoCommand>();
 
         DiscordClient.GuildAvailable += DiscordClientOnGuildAvailable;
 
         return base.OnLoad();
     }
 
-    private Task DiscordClientOnGuildAvailable(DiscordClient sender, GuildCreateEventArgs e)
+    private async Task DiscordClientOnGuildAvailable(DiscordClient sender, GuildCreateEventArgs e)
     {
         SlashCommandsExtension slashCommands = DiscordClient.GetSlashCommands();
-        slashCommands.RegisterCommands<BookmarkApplicationCommand>(e.Guild.Id);
-        slashCommands.RegisterCommands<UserInfoApplicationCommand>(e.Guild.Id);
-        return slashCommands.RefreshCommands();
+        await slashCommands.RefreshCommands();
     }
 
     private void RegisterUserInfoFields()
