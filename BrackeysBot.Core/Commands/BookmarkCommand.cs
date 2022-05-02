@@ -9,22 +9,22 @@ using Microsoft.Extensions.Logging;
 
 namespace BrackeysBot.Core.Commands;
 
-internal sealed class BookmarkApplicationCommand : ApplicationCommandModule
+internal sealed class BookmarkCommand : ApplicationCommandModule
 {
-    private readonly ILogger<BookmarkApplicationCommand> _logger;
+    private readonly ILogger<BookmarkCommand> _logger;
     private readonly BookmarkService _bookmarkService;
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="BookmarkApplicationCommand" /> class.
+    ///     Initializes a new instance of the <see cref="BookmarkCommand" /> class.
     /// </summary>
-    public BookmarkApplicationCommand(ILogger<BookmarkApplicationCommand> logger, BookmarkService bookmarkService)
+    public BookmarkCommand(ILogger<BookmarkCommand> logger, BookmarkService bookmarkService)
     {
         _logger = logger;
         _bookmarkService = bookmarkService;
     }
 
     [ContextMenu(ApplicationCommandType.MessageContextMenu, "🔖 Bookmark")]
-    public async Task BookmarkMessage(ContextMenuContext context)
+    public async Task BookmarkContextMenuAsync(ContextMenuContext context)
     {
         if (context.Member is not { } member)
             return;

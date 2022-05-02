@@ -7,15 +7,15 @@ using DSharpPlus.SlashCommands;
 
 namespace BrackeysBot.Core.Commands;
 
-internal sealed class UserInfoApplicationCommand : ApplicationCommandModule
+internal sealed class UserInfoCommand : ApplicationCommandModule
 {
     private readonly UserInfoService _userInfoService;
 
     /// <summary>
-    ///     Initializes a new instance of the <see cref="UserInfoApplicationCommand" /> class.
+    ///     Initializes a new instance of the <see cref="UserInfoCommand" /> class.
     /// </summary>
     /// <param name="userInfoService">The user info service.</param>
-    public UserInfoApplicationCommand(UserInfoService userInfoService)
+    public UserInfoCommand(UserInfoService userInfoService)
     {
         _userInfoService = userInfoService;
     }
@@ -31,7 +31,7 @@ internal sealed class UserInfoApplicationCommand : ApplicationCommandModule
     }
 
     [SlashCommand("userinfo", "Displays information about a user.")]
-    public async Task UserInfoAsync(InteractionContext context,
+    public async Task UserInfoSlashCommandAsync(InteractionContext context,
         [Option("user", "The user whose information to retrieve.")]
         DiscordUser user)
     {
