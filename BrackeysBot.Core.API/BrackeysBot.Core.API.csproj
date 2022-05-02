@@ -28,7 +28,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="BrackeysBot.API" Version="4.0.0-nightly.24"/>
+        <PackageReference Include="BrackeysBot.API" Version="4.0.0-nightly.31"/>
     </ItemGroup>
 
     <ItemGroup>
