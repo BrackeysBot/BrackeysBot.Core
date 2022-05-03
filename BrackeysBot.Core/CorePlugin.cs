@@ -148,6 +148,7 @@ internal sealed class CorePlugin : MonoPlugin, ICorePlugin
         commandsNext.RegisterCommands(typeof(CorePlugin).Assembly);
 
         SlashCommandsExtension slashCommands = DiscordClient.GetSlashCommands();
+        slashCommands.RegisterCommands<ClearCommand>();
         slashCommands.RegisterCommands<SayCommand>();
         slashCommands.RegisterCommands<UserInfoCommand>();
 

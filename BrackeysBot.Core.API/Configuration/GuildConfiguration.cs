@@ -22,6 +22,13 @@ public sealed class GuildConfiguration
     public ChannelConfiguration ChannelConfiguration { get; set; } = new();
 
     /// <summary>
+    ///     Gets or sets the response to give when the <c>clear</c> command has been used.
+    /// </summary>
+    /// <value>The <c>clear</c> response.</value>
+    [JsonPropertyName("clearMessageResponse")]
+    public string? ClearMessageResponse { get; set; } = "Please no spam! :slight_smile:";
+
+    /// <summary>
     ///     Gets or sets the role configuration.
     /// </summary>
     /// <value>The role configuration.</value>
