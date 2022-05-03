@@ -7,6 +7,9 @@ using DSharpPlus.SlashCommands;
 
 namespace BrackeysBot.Core.Commands;
 
+/// <summary>
+///     Represents a class which implements the <c>userinfo</c> command and <c>User Info</c> context menu.
+/// </summary>
 internal sealed class UserInfoCommand : ApplicationCommandModule
 {
     private readonly UserInfoService _userInfoService;

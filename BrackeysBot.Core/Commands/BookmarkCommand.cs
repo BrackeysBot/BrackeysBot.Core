@@ -9,6 +9,9 @@ using Microsoft.Extensions.Logging;
 
 namespace BrackeysBot.Core.Commands;
 
+/// <summary>
+///     Represents a class which implements the <c>Bookmark</c> context menu.
+/// </summary>
 internal sealed class BookmarkCommand : ApplicationCommandModule
 {
     private readonly ILogger<BookmarkCommand> _logger;

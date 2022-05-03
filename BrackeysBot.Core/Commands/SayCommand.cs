@@ -11,6 +11,9 @@ using DSharpPlus.SlashCommands.Attributes;
 
 namespace BrackeysBot.Core.Commands;
 
+/// <summary>
+///     Represents a class which implements the <c>say</c> command.
+/// </summary>
 internal sealed class SayCommand : ApplicationCommandModule
 {
     [SlashCommand("say", "Echoes a message to a specified channel.", false)]
